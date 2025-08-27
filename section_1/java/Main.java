@@ -2,16 +2,21 @@ import java.io.*;
 
 // Performs some sort of computation.
 // Takes a command-line argument - says where to write to,
-// either terminal or file
+// one of file, terminal, network location
 // 
 public class Main {
     private static BufferedWriter writer = null;
+    private static Socket socket = null;
     
     // Takes all the command-line arguments
-    // Returns null if it's writing to the terminal, otherwise
+    // Returns null if it's not writing to a file, otherwise
     // the name of the file to write to
     public static String getDestinationFile(String[] args) { ... }
 
+    // Returns null if it's not writing to a network location
+    public static NetworkLocation getNetworkDestination(String[] args) { ... }
+    // FOR WEDNESDAY: propagate network location change to rest of file
+    
     // problem: we need to maintain some state for open files (writer),
     // need to track if you've opened the file already
     public static void write(String destination,

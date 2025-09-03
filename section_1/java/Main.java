@@ -15,39 +15,51 @@ public class Main {
 
     // Returns null if it's not writing to a network location
     public static NetworkLocation getNetworkDestination(String[] args) { ... }
-    // FOR WEDNESDAY: propagate network location change to rest of file
-    
+
     // problem: we need to maintain some state for open files (writer),
     // need to track if you've opened the file already
     public static void write(String destination,
+                             NetworkLocation location,
                              String thingToWrite) throws IOException {
-        if (destination == null) {
-            // write to terminal
-            System.out.println(thingToWrite);
-        } else {
+        if (destination != null) {
+            // write to file
             if (writer == null) {
                 writer = new BufferedWriter(new FileWriter(new File(destination)));
             }
             writer.write(thingToWrite);
+        } else if (location != null) {
+            // write to network
+            if (socket == null) {
+                socket = new Socket(location);
+            }
+            socket.send(thingToWrite);
+        } else {
+            // write to terminal
+            System.out.println(thingToWrite);
         }
     }
     
-    public static int doComputation(String destination) throws IOException {
+    public static int doComputation(String destination,
+                                    NetworkLocation location) throws IOException {
         // Start of computation...
         // Pretend code is here to meaningfully compute part of the result
 
         // now we want to do a status update
-        write(destination, "still running");
+        write(destination, location, "still running");
 
         // ...now continue on with the computation        
     }
 
     public static void main(String[] args) throws IOException {
         String destination = getDestinationFile(args);
-        int result = doComputation();
-        write(destination, "" + result);
+        NetworkLocation location = getNetworkDestination(args);
+        int result = doComputation(destination, location);
+        write(destination, location, "" + result);
         if (writer != null) {
             writer.close();
+        }
+        if (socket != null) {
+            socket.disconnect();
         }
     }
 }

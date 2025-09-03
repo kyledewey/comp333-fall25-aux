@@ -18,6 +18,8 @@ public class Main {
         // Pretend code is here to meaningfully compute part of the result
 
         // now we want to do a status update
+        // ad-hoc polymorphism comes in: which specific write method is
+        // determined at runtime.
         writer.write("still running");
 
         // ...now continue on with the computation        
@@ -26,7 +28,19 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String destination = getDestinationFile(args);
         NetworkLocation location = getNetworkDestination(args);
-        Writer writer = new Writer(destination, location);
+        Writer writer = null;
+        if (destination != null && location != null) {
+            writer = new BothWriter(new FileWriter(destination),
+                                    new NetworkWriter(location));
+        } else if (destination != null) {
+            // subtyping polymorphism: can substitute FileWriter for Writer
+            writer = new FileWriter(destination);
+        } else if (location != null) {
+            writer = new NetworkWriter(location);
+        } else {
+            writer = new TerminalWriter();
+        }
+
         int result = doComputation(writer);
         writer.write("" + result);
         writer.close();

@@ -2,43 +2,30 @@ import java.io.*;
 
 // Program performs some computation
 // Program takes a command-line argument.
-// Command-line argument says to write to file or terminal
+// Command-line argument says to write to a
+// file, terminal, or network location
 public class Main {
-    public static BufferWriter writer = null;
-    
-    // returns null if we are writing to terminal, otherwise
-    // the name of the file to write to
+    // returns the name of the file to write to, or null
+    // if we aren't writing to a file
     public static String getDestinationFile(String[] args) { ... }
 
-    public static void write(String destination,
-                             String thingToWrite) throws IOException {
-        if (destination == null) {
-            // write to terminal
-            System.out.println(thingToWrite);
-        } else {
-            // write to file
-            if (writer == null) {
-                writer = new BufferedWriter(new FileWriter(new File(destination)));
-            }
-            writer.write(thingToWrite);
-        }
-    }
+    // returns the location of the place to write to on the network,
+    // or null if we aren't writing to the network
+    public static NetworkLocation getNetworkLocation(String[] args) { ... }
 
-    public static int doComputation(String destination) throws IOException {
+    public static int doComputation(Writer writer) throws IOException {
         // Pretend there is some work done here for the computation
-
         // give user status update
-        write(destination, "still running");
-
+        writer.write("still running");
         // Finish the computation...        
     }
 
     public static void main(String[] args) throws IOException {
         String destination = getDestinationFile(args);
-        int result = doComputation(destination);
-        write(destination, "" + result);
-        if (writer != null) {
-            writer.close();
-        }
+        NetworkLocation location = getNetworkLocation(args);
+        Writer writer = new Writer(destination, location);
+        int result = doComputation(writer);
+        writer.write("" + result);
+        writer.close();
     }
 }

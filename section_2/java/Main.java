@@ -23,8 +23,23 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String destination = getDestinationFile(args);
         NetworkLocation location = getNetworkLocation(args);
-        Writer writer = new Writer(destination, location);
+        Writer writer;
+        if (destination != null) {
+            // subtyping polymorphism: expected a Writer, received a
+            // FileWriter (which is a specific kind of Writer, i.e.,
+            // a subtype of Writer). Compile-time.
+            writer = new FileWriter(destination);
+        } else if (location != null) {
+            writer = new NetworkWriter(location);
+        } else {
+            writer = new TerminalWriter();
+        }
+        
         int result = doComputation(writer);
+
+        // virtual dispatch involving write (ad-hoc polymorphism)
+        // runtime feature - we delay the determination of the specific
+        // write method called until runtime
         writer.write("" + result);
         writer.close();
     }

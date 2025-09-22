@@ -12,10 +12,25 @@ public class Cons implements ImmutableList {
     public boolean isEmpty() {
         return false;
     }
-    
+
     public int length() {
-        return 7;
+        // [3, 1, 2].length()
+        // -Expected return value: 3
+        // -head: 3
+        // -tail:    [1, 2]
+        // -this: [3, 1, 2] (what we started with)
+
+        // Because recursive: ...length()...
+        // Because smaller: tail.length()
+        int rest = tail.length();
+        //         [1, 2].length()
+        // rest: 2
+
+        return rest + 1;
+
+        // return 1 + tail.length();
     }
+    
     public int sum() { // empty list sum is defined as 0
         return 5;
     }

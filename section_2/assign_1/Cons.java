@@ -9,6 +9,25 @@ public class Cons implements ImmutableList {
         this.tail = tail;
     } // Cons
 
+    public ImmutableList addAmount(final int amount) {
+        // [3, 1, 2].addAmount(4)
+        // -Expected return value: [7, 5, 6]
+        // -amount: 4
+        // -head: 3
+        // -tail: [1, 2]
+        // -this: [3, 1, 2] (what we start with)
+
+        // ...addAmount(...)
+        ImmutableList rest = tail.addAmount(amount);
+        //                 [1, 2].addAmount(4);
+        // rest: [5, 6]
+
+        int newHead = head + amount;
+        return new Cons(newHead, rest);
+
+        // return new Cons(head + amount, tail.addAmount(amount));
+    }
+    
     public boolean isEmpty() {
         return false;
     }

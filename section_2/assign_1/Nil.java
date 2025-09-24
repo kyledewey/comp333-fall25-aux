@@ -1,6 +1,14 @@
 public class Nil implements ImmutableList {
     public Nil() {}
 
+    public ImmutableList addAmount(final int amount) {
+        // [].addAmount(1): []
+        // amount: 1
+        // this: []
+        // return new Nil();
+        return this;
+    }
+    
     public boolean isEmpty() {
         return true;
     }

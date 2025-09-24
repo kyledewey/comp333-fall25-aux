@@ -6,6 +6,12 @@ public interface ImmutableList {
 
     public boolean isEmpty();
 
+    // [3, 1, 2].addAmount(4): [7, 5, 6]
+    // [5].addAmount(7): [12]
+    // [].addAmount(1): []
+    // [0].addAmount(1): [1]
+    public ImmutableList addAmount(final int amount);
+    
     public boolean equals(final Object other);
     public String toString();
     public int hashCode();

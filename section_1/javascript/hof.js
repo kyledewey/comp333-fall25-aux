@@ -47,4 +47,10 @@ function printAllLessThan10(arr) {
     printAllLessThanN(arr, 10);
 }
 
-    
+function callMe(foo) {
+    foo();
+}
+
+function printHello() {
+    console.log("hello");
+}

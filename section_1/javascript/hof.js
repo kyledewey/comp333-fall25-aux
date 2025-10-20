@@ -11,23 +11,32 @@ function printSome(arr, compare) {
         }
     }
 }
-    
+
+function example(arr) {
+    let someValue = 0;
+    printSome(arr,
+              function (someElement) {
+                  someValue++;
+                  return true;
+              });
+    console.log("---");
+    console.log(someValue);
+}
+
 function printAllLessThanN(arr, n) {
-    for (let index = 0; index < arr.length; index++) {
-        let element = arr[index];
-        if (element < n) {
-            console.log(element);
-        }
-    }
+    printSome(arr, (e) => e < n);
+    // printSome(arr,
+    //           function (e) {
+    //               return e < n;
+    //           });
 }
 
 function printAllGreaterThanN(arr, n) {
-    for (let index = 0; index < arr.length; index++) {
-        let element = arr[index];
-        if (element > n) {
-            console.log(element);
-        }
-    }
+    printSome(arr, (e) => e > n);
+    // printSome(arr,
+    //           function (e) {
+    //               return e > n;
+    //           });
 }
 
 function printAllLessThan5(arr) {

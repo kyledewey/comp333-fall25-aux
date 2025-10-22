@@ -54,3 +54,33 @@ function callMe(foo) {
 function printHello() {
     console.log("hello");
 }
+
+function printBye() {
+    console.log("bye");
+}
+
+function indirectIf(statement, func1, func2) {
+    (statement) ? func1() : func2();
+    // if (statement) {
+    //     func1();
+    // } else {
+    //     func2();
+    // }
+}
+
+function indirectWhile(func1, func2) {
+    if (func1()) {
+        func2();
+        indirectWhile(func1, func2);
+    }
+}
+
+function example2() {
+    let x = 0;
+    indirectWhile(() => x < 10, () => x++);
+    return x;
+}
+
+function delayedAdd(x) {
+    return (y) => x + y;
+}

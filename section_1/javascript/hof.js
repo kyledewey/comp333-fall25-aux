@@ -75,10 +75,10 @@ function indirectDoWhile(func1, func2) {
     }
 }
 
-function indirectWhile(func1, func2) {
-    if (func1()) {
-        func2();
-        indirectWhile(func1, func2);
+function indirectWhile(condition, body) {
+    if (condition()) {
+        body();
+        indirectWhile(condition, body);
     }
 }
 

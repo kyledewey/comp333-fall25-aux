@@ -36,3 +36,45 @@ function printAllLessThan5(arr) {
 function printAllLessThan10(arr) {
     printAllLessThanN(arr, 10);
 }
+
+function printHello() {
+    console.log("hello");
+}
+
+function printGoodbye() {
+    console.log("goodbye");
+}
+
+function callMe(foo) {
+    foo();
+}
+
+function returns7() {
+    return 7;
+}
+
+// let callMe = (foo) => foo();
+
+function indirectIf(bool, first, second) {
+    if (bool) {
+        first();
+    } else {
+        second();
+    }
+}
+
+// let indirectIf = (bool, a, b) => (bool) ? a() : b();
+
+function indirectWhile(condition, body) {
+    // (condition()) ?
+    //     (body(), indirectWhile(condition, body)) :
+    //     undefined;
+    if (condition()) {
+        body();
+        indirectWhile(condition, body);
+    }
+}
+
+function delayedAdd(x) {
+    return (y) => x + y;
+}

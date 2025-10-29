@@ -7,7 +7,7 @@ function forEach(arr, operation) {
         operation(element);
     }
 }
-    
+
 function printAll(arr) {
     forEach(arr, (e) => console.log(e));
 }

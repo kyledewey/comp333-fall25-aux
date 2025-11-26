@@ -2,19 +2,24 @@
 //     return { 'width' : w, 'height' : h };
 // }
 
-let rectanglePrototype = {
-    'getArea': function() {
-        return this.width * this.height;
-    }
-};
+// let rectanglePrototype = {
+//     'getArea': function() {
+//         return this.width * this.height;
+//     }
+// };
+function foo() {}
 
 function Rectangle(w, h) {
     // this = {};
+    // this.__proto__ = Rectangle.prototype;
     this.width = w;
     this.height = h;
-    this.__proto__ = rectanglePrototype;
     // return this;
 }
+
+Rectangle.prototype.getArea = function() {
+    return this.width * this.height;
+};
 
 // rectangle: object with width and height fields
 // function getArea(rectangle) {

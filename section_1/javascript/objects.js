@@ -2,6 +2,7 @@
 //     return { 'width' : w, 'height' : h };
 // }
 
+function Shape() {}
 function Rectangle(w, h) {
     // this = {};
     // this.__proto__ = Rectangle.prototype;
@@ -9,14 +10,18 @@ function Rectangle(w, h) {
     this.height = h;
     // return this;
 }
-
+Shape.prototype.foo = function (param) {
+    return param;
+};
+Rectangle.prototype = new Shape();
 Rectangle.prototype.getArea = function() {
     return this.width * this.height;
 };
-Rectangle.prototype.addToWidthAndHeight = function(amount) {
-    this.width += amount;
-    this.height += amount;
-};
+
+// Rectangle.prototype.addToWidthAndHeight = function(amount) {
+//     this.width += amount;
+//     this.height += amount;
+// };
 
 // function getArea(rectangle) {
 //     return rectangle.width * rectangle.height;

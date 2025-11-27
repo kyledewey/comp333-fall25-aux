@@ -7,8 +7,11 @@
 //         return this.width * this.height;
 //     }
 // };
-function foo() {}
 
+function Shape() {}
+Shape.prototype.identity = function (param) {
+    return param;
+};
 function Rectangle(w, h) {
     // this = {};
     // this.__proto__ = Rectangle.prototype;
@@ -17,6 +20,7 @@ function Rectangle(w, h) {
     // return this;
 }
 
+Rectangle.prototype = new Shape();
 Rectangle.prototype.getArea = function() {
     return this.width * this.height;
 };

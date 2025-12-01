@@ -2,11 +2,11 @@ function Base() {}
 function Sub1() {}
 function Sub2() {}
 
-Sub1.prototype = new Base();
-Sub2.prototype = new Base();
 Base.prototype.method = function() {
     console.log("base");
 };
+Sub1.prototype = new Base();
+Sub2.prototype = new Base();
 Sub1.prototype.method = function() {
     console.log("sub1");
 };
